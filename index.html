@@ -4,274 +4,603 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="MOVÍ: controla tus ingresos, gastos, kilómetros y metas como conductor de plataformas.">
-<meta name="theme-color" content="#050505">
+<meta name="theme-color" content="#080808">
+<meta name="description" content="MOVÍ ayuda a conductores de plataformas a controlar ingresos, gastos, kilómetros y metas.">
 <title>MOVÍ | Tu trabajo, bajo control</title>
 
 <style>
+:root{
+  --bg:#080808;
+  --panel:#141414;
+  --gold:#eac34d;
+  --gold2:#b98c20;
+  --white:#f7f7f7;
+  --muted:#bdbdbd;
+  --green:#39c96b;
+}
 *{box-sizing:border-box}
-body{margin:0;background:#050505;color:#fff;font-family:Arial,Helvetica,sans-serif}
-.poster{position:relative;width:100%;max-width:1100px;margin:auto;line-height:0}
-.poster img{display:block;width:100%;height:auto}
-.hotspot{position:absolute;z-index:2;display:block;padding:0;border:0;border-radius:8px;background:transparent;cursor:pointer}
-.hotspot:focus-visible{outline:3px solid #ffe36a;outline-offset:2px}
-.modal{display:none;position:fixed;inset:0;z-index:50;padding:18px;align-items:center;justify-content:center;background:rgba(0,0,0,.9)}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
+body{
+  margin:0;background:var(--bg);color:var(--white);
+  font-family:Arial,Helvetica,sans-serif;line-height:1.55;
+}
+a{color:inherit}
+button{font:inherit}
+.container{width:min(1160px,92%);margin:auto}
+.gold{color:var(--gold)}
+header{
+  position:sticky;top:0;z-index:20;
+  background:rgba(5,5,5,.96);
+  border-bottom:1px solid #55451f;
+  backdrop-filter:blur(12px);
+}
+.nav{
+  min-height:72px;display:flex;align-items:center;
+  justify-content:space-between;gap:20px;
+}
+.logo{
+  font-size:32px;font-weight:900;font-style:italic;
+  letter-spacing:-2px;color:white;text-decoration:none;
+}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:22px}
+.nav-links a{
+  font-size:13px;text-decoration:none;color:#eee;
+  transition:.2s;
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-wa{
+  border:1px solid var(--green);padding:9px 15px;
+  border-radius:25px;color:#fff!important;
+}
+.menu-btn{
+  display:none;background:#171717;color:white;
+  border:1px solid #555;border-radius:8px;
+  padding:9px 12px;cursor:pointer;
+}
+.hero{
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(ellipse at 80% 30%,#51401b55,transparent 45%),
+    linear-gradient(110deg,#090909 25%,#191919 70%,#080808);
+  border-bottom:1px solid var(--gold2);
+}
+.hero-grid{
+  min-height:510px;display:grid;
+  grid-template-columns:1.05fr .95fr;
+  align-items:center;gap:30px;padding-top:55px;padding-bottom:55px;
+}
+.eyebrow{
+  color:var(--gold);font-size:12px;
+  font-weight:800;letter-spacing:2px;text-transform:uppercase;
+}
+.hero h1{
+  font-size:clamp(36px,5vw,62px);
+  line-height:1.04;letter-spacing:-1.8px;
+  margin:15px 0 20px;
+}
+.hero h1 span{color:var(--gold)}
+.hero-copy{font-size:18px;color:#ddd;max-width:560px}
+.actions{display:flex;flex-wrap:wrap;gap:13px;margin-top:28px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:9px;padding:14px 23px;border-radius:30px;
+  text-decoration:none;font-weight:800;border:1px solid transparent;
+  cursor:pointer;transition:.2s;
+}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.12)}
+.btn-gold{
+  color:#111;background:linear-gradient(100deg,#c99c2b,#ffe47d);
+}
+.btn-outline{border-color:#aaa;color:white;background:transparent}
+.hero-visual{
+  min-height:360px;display:flex;align-items:center;
+  justify-content:center;position:relative;
+}
+.driver-placeholder{
+  width:min(100%,470px);min-height:330px;
+  border-radius:28px;border:1px solid #715b29;
+  background:
+    radial-gradient(circle at 70% 30%,#7b602c55,transparent 35%),
+    linear-gradient(140deg,#303030,#101010 65%);
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:30px;position:relative;overflow:hidden;
+}
+.driver-placeholder:before{
+  content:"MOVÍ";position:absolute;right:-15px;bottom:-60px;
+  font-size:130px;font-weight:900;font-style:italic;
+  color:#ffffff08;
+}
+.driver-placeholder .phone{
+  position:relative;z-index:1;width:175px;
+  border:5px solid #777;border-radius:28px;
+  padding:22px 12px;background:#050505;
+  box-shadow:0 15px 50px #000;
+  transform:rotate(5deg);
+}
+.phone-logo{font-size:23px;font-weight:900;font-style:italic}
+.phone-logo span{color:var(--gold)}
+.phone-chart{
+  height:75px;display:flex;align-items:end;
+  justify-content:center;gap:6px;margin:18px 0;
+}
+.phone-chart i{display:block;width:15px;background:var(--gold);border-radius:3px 3px 0 0}
+.phone-chart i:nth-child(1){height:25px}
+.phone-chart i:nth-child(2){height:38px}
+.phone-chart i:nth-child(3){height:50px}
+.phone-chart i:nth-child(4){height:65px}
+.phone-items{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.phone-items span{
+  padding:9px 3px;background:#191919;
+  border:1px solid #5c4a20;border-radius:8px;font-size:10px;
+}
+.hero-note{
+  position:absolute;left:0;right:0;bottom:0;
+  text-align:center;color:#cfcfcf;font-size:12px;
+}
+.trust-strip{
+  display:flex;justify-content:center;flex-wrap:wrap;
+  gap:25px;padding:17px 0;color:#ddd;font-size:13px;
+}
+.trust-strip span{display:flex;align-items:center;gap:8px}
+.trust-strip b{color:var(--gold);font-size:19px}
+section{padding:75px 0}
+.section-heading{text-align:center;margin-bottom:35px}
+.section-heading h2{
+  font-size:clamp(27px,4vw,39px);margin:0 0 8px;
+}
+.section-heading p{color:var(--muted);margin:0}
+.features{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:17px;
+}
+.feature{
+  background:linear-gradient(145deg,#1a1a1a,#0e0e0e);
+  border:1px solid #484848;border-radius:16px;
+  padding:25px 21px;transition:.2s;
+}
+.feature:hover{border-color:var(--gold);transform:translateY(-4px)}
+.feature-icon{font-size:34px;color:var(--gold)}
+.feature h3{font-size:20px;margin:12px 0 7px}
+.feature p{color:#ccc;font-size:14px;margin:0 0 15px}
+.text-link{
+  color:var(--gold);font-weight:bold;font-size:13px;
+  text-decoration:none;
+}
+.pwa-section{
+  background:linear-gradient(110deg,#17130a,#101010 55%,#191919);
+  border-top:1px solid #58451c;border-bottom:1px solid #58451c;
+}
+.pwa-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:35px;align-items:center;
+}
+.pwa-section h2{font-size:clamp(27px,4vw,38px);line-height:1.15}
+.pwa-section p{color:#ddd}
+.pwa-points{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pwa-point{
+  background:#171717;border:1px solid #514321;
+  padding:17px;border-radius:12px;
+}
+.pwa-point strong{display:block;color:var(--gold);font-size:17px}
+.pwa-point small{color:#bbb}
+.pricing-layout{
+  display:grid;grid-template-columns:1fr 1fr .9fr;gap:18px;
+  align-items:stretch;
+}
+.plan,.payment{
+  background:linear-gradient(145deg,#1b1b1b,#0b0b0b);
+  border:1px solid #666;border-radius:18px;padding:25px;
+}
+.plan.featured{border:2px solid var(--gold);position:relative}
+.plan-tag{
+  display:inline-block;color:#111;background:var(--gold);
+  padding:5px 12px;border-radius:20px;
+  font-size:11px;font-weight:900;
+}
+.plan h3{font-size:21px;margin:10px 0}
+.price{font-size:39px;font-weight:900;color:white;line-height:1.1}
+.price small{font-size:14px}
+.duration{color:#bbb;font-size:13px;margin:8px 0 17px}
+.plan ul{list-style:none;padding:0;margin:0 0 20px}
+.plan li{margin:8px 0;color:#ddd;font-size:14px}
+.plan li:before{content:"✓";color:var(--green);font-weight:bold;margin-right:9px}
+.plan .btn{width:100%}
+.payment{border-color:#5c4a20}
+.wompi{font-size:30px;font-weight:900;font-style:italic;color:white}
+.payment p{font-size:14px;color:#ccc}
+.payment-points{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+.payment-points div{
+  background:#1c1c1c;padding:12px 8px;
+  border-radius:9px;text-align:center;font-size:12px;
+}
+.payment-points b{display:block;color:var(--gold);font-size:19px}
+.install-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.install-card{
+  padding:25px;background:#131313;border:1px solid #4d4d4d;
+  border-radius:16px;
+}
+.install-card h3{font-size:22px;margin:0 0 14px}
+.install-card ol{padding-left:22px;color:#ddd}
+.install-card li{padding:5px 0;font-size:14px}
+.install-note{color:#999;text-align:center;font-size:12px;margin-top:20px}
+.final-cta{
+  padding:45px 20px;text-align:center;
+  background:linear-gradient(100deg,#171208,#29200d,#111);
+  border-top:1px solid var(--gold2);border-bottom:1px solid var(--gold2);
+}
+.final-cta h2{font-size:clamp(25px,4vw,36px);margin:0 0 10px}
+footer{padding:30px 0;background:#050505}
+.footer-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:18px;
+}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap}
+.footer-links button{
+  background:none;border:0;color:#ccc;cursor:pointer;font-size:13px;
+}
+.footer-links button:hover{color:var(--gold)}
+.copyright{color:#888;font-size:12px}
+.modal{
+  display:none;position:fixed;inset:0;z-index:40;
+  background:#000d;padding:18px;align-items:center;justify-content:center;
+}
 .modal.open{display:flex}
-.panel{position:relative;width:min(620px,100%);max-height:88vh;overflow:auto;padding:28px;background:linear-gradient(145deg,#191919,#080808);border:1px solid #c49b28;border-radius:18px;box-shadow:0 0 32px #c49b2830;line-height:1.6}
-.panel h2{margin:0 42px 18px 0;color:#f2cb4b;font-size:26px;line-height:1.2}
-.panel h3{margin:18px 0 5px;color:#f0d16c}
-.panel p,.panel li{color:#ddd;font-size:15px}
-.close{position:absolute;top:12px;right:12px;width:38px;height:38px;border:1px solid #b99025;border-radius:50%;background:#111;color:#fff;font-size:24px;cursor:pointer}
-.action{display:inline-block;margin-top:12px;padding:12px 20px;border-radius:28px;background:linear-gradient(90deg,#c49b28,#ffe27b);color:#111!important;font-weight:800;text-decoration:none}
-.note{font-size:12px!important;color:#aaa!important}
-@media(max-width:600px){
-.panel{padding:23px 19px}
-.panel h2{font-size:22px}
+.modal-panel{
+  position:relative;width:min(620px,100%);max-height:85vh;
+  overflow:auto;padding:30px;border-radius:17px;
+  border:1px solid var(--gold2);
+  background:linear-gradient(145deg,#1b1b1b,#080808);
+  box-shadow:0 0 35px #d3a72b22;
+}
+.modal-panel h2{color:var(--gold);margin:0 40px 18px 0}
+.modal-panel h3{color:#e8ca6b;margin:18px 0 5px}
+.modal-panel p,.modal-panel li{color:#ddd;font-size:14px}
+.modal-close{
+  position:absolute;right:13px;top:13px;
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid #987625;background:#111;color:white;
+  font-size:22px;cursor:pointer;
+}
+@media(max-width:900px){
+  .nav-links{gap:12px}
+  .nav-links a{font-size:12px}
+  .pricing-layout{grid-template-columns:1fr 1fr}
+  .payment{grid-column:1/-1}
+}
+@media(max-width:700px){
+  .nav{min-height:64px}
+  .menu-btn{display:block}
+  .nav-links{
+    display:none;position:absolute;top:64px;left:0;right:0;
+    padding:18px 5%;background:#090909;
+    border-bottom:1px solid #5c4a20;
+    flex-direction:column;align-items:stretch;gap:0;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{padding:12px 5px;font-size:15px}
+  .nav-wa{text-align:center;margin-top:8px}
+  .hero-grid{grid-template-columns:1fr;min-height:auto;padding:55px 0 45px;gap:20px}
+  .hero h1{font-size:clamp(36px,10vw,50px)}
+  .hero-copy{font-size:16px}
+  .hero-visual{min-height:240px}
+  .driver-placeholder{min-height:240px}
+  .driver-placeholder .phone{width:145px;padding:15px 10px}
+  .trust-strip{gap:12px;font-size:11px}
+  section{padding:55px 0}
+  .features{grid-template-columns:1fr 1fr;gap:10px}
+  .feature{padding:17px 14px}
+  .feature h3{font-size:17px}
+  .feature p{font-size:13px}
+  .pwa-grid{grid-template-columns:1fr;gap:20px}
+  .pricing-layout{grid-template-columns:1fr}
+  .payment{grid-column:auto}
+  .install-grid{grid-template-columns:1fr}
+  .footer-inner{flex-direction:column;text-align:center}
+  .footer-links{justify-content:center}
+}
+@media(max-width:390px){
+  .features{grid-template-columns:1fr}
+  .pwa-points{grid-template-columns:1fr 1fr}
+  .actions .btn{width:100%}
 }
 </style>
 </head>
 
 <body>
 
-<main class="poster" id="poster">
+<header>
+  <div class="container nav">
+    <a href="#inicio" class="logo">MOVÍ<span>.</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">☰ Menú</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#inicio">Inicio</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#funciones">Funciones</a>
+      <a href="#planes">Planes</a>
+      <a href="#instalacion">Instalación</a>
+      <a href="#" onclick="openModal('privacidad');return false">Privacidad</a>
+      <a href="#" onclick="openModal('terminos');return false">Términos</a>
+      <a href="#" onclick="openModal('ayuda');return false">Ayuda</a>
+      <a class="nav-wa" href="https://wa.me/573236500268" target="_blank" rel="noopener">WhatsApp ↗</a>
+    </nav>
+  </div>
+</header>
 
-<img src="movi-portada-principal-2026.png"
-alt="MOVÍ: tu trabajo bajo control. Ingresos, gastos, kilómetros, metas, planes, pagos con Wompi e instalación en el celular."
-fetchpriority="high">
+<main>
 
-<!-- MENÚ SUPERIOR -->
+<section class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Plataforma para conductores</div>
+      <h1>Controla tus ingresos.<br><span>Conoce tus ganancias.</span><br>Trabaja con objetivos.</h1>
+      <p class="hero-copy">MOVÍ es la herramienta que te ayuda a organizar tus ingresos, gastos, kilómetros y metas como conductor de plataformas.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="https://mov-control-de-ganancias.ai.studio" target="_blank" rel="noopener">Comenzar con MOVÍ →</a>
+        <a class="btn btn-outline" href="#funciones">Ver cómo funciona</a>
+      </div>
+    </div>
 
-<button class="hotspot" style="left:20.5%;top:.35%;width:8.5%;height:3%" aria-label="Inicio" onclick="topPage()"></button>
+    <div class="hero-visual">
+      <div class="driver-placeholder">
+        <div>
+          <div class="phone">
+            <div class="phone-logo">MOVÍ<span>.</span></div>
+            <div style="font-size:10px;color:#aaa;margin-top:5px">Tu trabajo, bajo control</div>
+            <div class="phone-chart"><i></i><i></i><i></i><i></i></div>
+            <div class="phone-items">
+              <span>▥ Ingresos</span><span>▱ Gastos</span>
+              <span>⌖ Kilómetros</span><span>◎ Metas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-note">Tu trabajo, bajo control.</div>
+    </div>
+  </div>
+  <div class="container trust-strip">
+    <span><b>⚡</b> Rápida</span>
+    <span><b>✦</b> Ligera</span>
+    <span><b>▣</b> Sin tienda de aplicaciones</span>
+    <span><b>✓</b> Pagos mediante Wompi</span>
+  </div>
+</section>
 
-<button class="hotspot" style="left:29.5%;top:.35%;width:11%;height:3%" aria-label="Nosotros" onclick="show('nosotros')"></button>
+<section id="nosotros">
+  <div class="container section-heading">
+    <h2>Una herramienta pensada para tu trabajo</h2>
+    <p>Organiza tu actividad diaria y toma decisiones con información clara.</p>
+  </div>
+</section>
 
-<button class="hotspot" style="left:40.5%;top:.35%;width:12%;height:3%" aria-label="Funciones" onclick="show('funciones')"></button>
+<section id="funciones" style="padding-top:0">
+  <div class="container">
+    <div class="section-heading">
+      <h2>¿Qué puedes hacer con <span class="gold">MOVÍ</span>?</h2>
+      <p>Todo el control de tu trabajo en un solo lugar.</p>
+    </div>
+    <div class="features">
+      <article class="feature">
+        <div class="feature-icon">▥</div>
+        <h3>Ingresos</h3>
+        <p>Registra y consulta los ingresos diarios de tus aplicaciones.</p>
+        <a class="text-link" href="https://mov-control-de-ganancias.ai.studio" target="_blank" rel="noopener">Ver en MOVÍ →</a>
+      </article>
+      <article class="feature">
+        <div class="feature-icon">▱</div>
+        <h3>Gastos</h3>
+        <p>Organiza combustible, cuota del vehículo y otros costos.</p>
+        <a class="text-link" href="https://mov-control-de-ganancias.ai.studio" target="_blank" rel="noopener">Ver en MOVÍ →</a>
+      </article>
+      <article class="feature">
+        <div class="feature-icon">⌖</div>
+        <h3>Kilómetros</h3>
+        <p>Lleva el control de tus recorridos y consulta el costo por kilómetro.</p>
+        <a class="text-link" href="https://mov-control-de-ganancias.ai.studio" target="_blank" rel="noopener">Ver en MOVÍ →</a>
+      </article>
+      <article class="feature">
+        <div class="feature-icon">◎</div>
+        <h3>Metas</h3>
+        <p>Define objetivos diarios y mensuales. Consulta tu avance.</p>
+        <a class="text-link" href="https://mov-control-de-ganancias.ai.studio" target="_blank" rel="noopener">Ver en MOVÍ →</a>
+      </article>
+    </div>
+  </div>
+</section>
 
-<button class="hotspot" style="left:52%;top:.35%;width:8.5%;height:3%" aria-label="Planes" onclick="show('planes')"></button>
+<section class="pwa-section">
+  <div class="container pwa-grid">
+    <div>
+      <div class="eyebrow">Tecnología PWA</div>
+      <h2>Una aplicación ligera y siempre disponible.</h2>
+      <p>MOVÍ funciona como una aplicación web progresiva (PWA). Puedes abrirla desde tu celular y agregar un acceso directo a tu pantalla de inicio para usarla con una experiencia similar a una app.</p>
+      <a class="btn btn-gold" href="#instalacion">Conoce cómo instalarla →</a>
+    </div>
+    <div class="pwa-points">
+      <div class="pwa-point"><strong>Menos de 2 MB</strong><small>De peso de la aplicación, sujeto a verificación del paquete publicado.</small></div>
+      <div class="pwa-point"><strong>Un solo toque</strong><small>Acceso directo desde el icono de tu celular.</small></div>
+      <div class="pwa-point"><strong>Sin tiendas</strong><small>No necesitas descargarla desde Play Store o App Store.</small></div>
+      <div class="pwa-point"><strong>Como una app</strong><small>Acceso cómodo desde la pantalla de inicio.</small></div>
+    </div>
+  </div>
+</section>
 
-<button class="hotspot" style="left:60.5%;top:.35%;width:12%;height:3%" aria-label="Instalación" onclick="show('instalacion')"></button>
+<section id="planes">
+  <div class="container">
+    <div class="section-heading">
+      <h2>Planes <span class="gold">MOVÍ</span></h2>
+      <p>Elige el periodo que mejor se adapta a tu trabajo.</p>
+    </div>
 
-<button class="hotspot" style="left:72%;top:.35%;width:11%;height:3%" aria-label="Privacidad" onclick="show('privacidad')"></button>
+    <div class="pricing-layout">
+      <article class="plan">
+        <h3>Plan mensual</h3>
+        <div class="price">$9.900 <small>COP</small></div>
+        <div class="duration">Acceso durante 30 días</div>
+        <ul>
+          <li>Acceso completo a MOVÍ</li>
+          <li>Registro de ingresos y gastos</li>
+          <li>Control de kilómetros</li>
+          <li>Metas y reportes</li>
+        </ul>
+        <a class="btn btn-outline" href="https://mov-control-de-ganancias.ai.studio" target="_blank" rel="noopener">Elegir plan mensual →</a>
+      </article>
 
-<button class="hotspot" style="left:82.5%;top:.35%;width:9.5%;height:3%" aria-label="Términos" onclick="show('terminos')"></button>
+      <article class="plan featured">
+        <span class="plan-tag">MÁS CONVENIENTE</span>
+        <h3>Plan anual</h3>
+        <div class="price">$79.000 <small>COP</small></div>
+        <div class="duration">Acceso durante 365 días</div>
+        <ul>
+          <li>Todo lo del plan mensual</li>
+          <li>Ahorra más de 15%</li>
+          <li>Acceso por un año completo</li>
+          <li>Soporte y actualizaciones</li>
+        </ul>
+        <a class="btn btn-gold" href="https://mov-control-de-ganancias.ai.studio" target="_blank" rel="noopener">Elegir plan anual →</a>
+      </article>
 
-<button class="hotspot" style="left:92%;top:.35%;width:7.5%;height:3%" aria-label="Ayuda" onclick="show('ayuda')"></button>
+      <article class="payment">
+        <div class="eyebrow">Pagos confiables</div>
+        <div class="wompi">Wompi</div>
+        <p>Los pagos de tu suscripción a MOVÍ se procesan mediante Wompi, una plataforma de pagos de Colombia. La transacción utiliza los mecanismos de seguridad y validación dispuestos por el proveedor.</p>
+        <div class="payment-points">
+          <div><b>✓</b>Transacciones procesadas por Wompi</div>
+          <div><b>▣</b>Proceso de pago confiable</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
 
-<!-- DESCARGAR / ABRIR APP -->
+<section id="instalacion" style="padding-top:10px">
+  <div class="container">
+    <div class="section-heading">
+      <h2>Instala MOVÍ en tu celular</h2>
+      <p>Accede en segundos y úsala como una app.</p>
+    </div>
+    <div class="install-grid">
+      <article class="install-card">
+        <h3>🤖 Android</h3>
+        <ol>
+          <li>Abre MOVÍ en Google Chrome.</li>
+          <li>Pulsa los tres puntos del menú.</li>
+          <li>Selecciona “Instalar aplicación” o “Agregar a pantalla de inicio”, si aparece.</li>
+          <li>Abre MOVÍ desde el icono en tu pantalla.</li>
+        </ol>
+      </article>
+      <article class="install-card">
+        <h3> iPhone</h3>
+        <ol>
+          <li>Abre MOVÍ en el navegador compatible.</li>
+          <li>Pulsa el icono de compartir.</li>
+          <li>Selecciona “Agregar a pantalla de inicio”, si está disponible.</li>
+          <li>Abre MOVÍ desde el icono en tu pantalla.</li>
+        </ol>
+      </article>
+    </div>
+    <p class="install-note">Las opciones pueden variar según el dispositivo, navegador y versión del sistema operativo.</p>
+  </div>
+</section>
 
-<a class="hotspot"
-style="left:27%;top:20%;width:47%;height:4.2%"
-href="https://mov-control-de-ganancias.ai.studio"
-target="_blank" rel="noopener"
-aria-label="Abrir MOVÍ"></a>
-
-<!-- BOTONES VER MÁS -->
-
-<button class="hotspot" style="left:37%;top:34.4%;width:11%;height:3.4%" aria-label="Más información de ingresos" onclick="show('ingresos')"></button>
-
-<button class="hotspot" style="left:84%;top:34.4%;width:11%;height:3.4%" aria-label="Más información de gastos" onclick="show('gastos')"></button>
-
-<button class="hotspot" style="left:37%;top:40.1%;width:11%;height:3.4%" aria-label="Más información de kilómetros" onclick="show('kilometros')"></button>
-
-<button class="hotspot" style="left:84%;top:40.1%;width:11%;height:3.4%" aria-label="Más información de metas" onclick="show('metas')"></button>
-
-<!-- PLANES -->
-
-<a class="hotspot"
-style="left:15%;top:57.4%;width:34%;height:3.1%"
-href="https://mov-control-de-ganancias.ai.studio"
-target="_blank" rel="noopener"
-aria-label="Elegir plan mensual"></a>
-
-<a class="hotspot"
-style="left:57%;top:57.4%;width:33%;height:3.1%"
-href="https://mov-control-de-ganancias.ai.studio"
-target="_blank" rel="noopener"
-aria-label="Elegir plan anual"></a>
-
-<!-- BOTÓN ABRIR MOVÍ -->
-
-<a class="hotspot"
-style="left:32%;top:91.3%;width:34%;height:3.7%"
-href="https://mov-control-de-ganancias.ai.studio"
-target="_blank" rel="noopener"
-aria-label="Abrir MOVÍ ahora"></a>
-
-<!-- WHATSAPP -->
-
-<a class="hotspot"
-style="left:68%;top:90.3%;width:25%;height:4.3%"
-href="https://wa.me/573236500268"
-target="_blank" rel="noopener"
-aria-label="Contactar MOVÍ por WhatsApp"></a>
-
-<!-- PIE DE PÁGINA -->
-
-<button class="hotspot" style="left:68%;top:97%;width:10%;height:2.5%" aria-label="Privacidad" onclick="show('privacidad')"></button>
-
-<button class="hotspot" style="left:79%;top:97%;width:11%;height:2.5%" aria-label="Términos" onclick="show('terminos')"></button>
-
-<button class="hotspot" style="left:91%;top:97%;width:8%;height:2.5%" aria-label="Ayuda" onclick="show('ayuda')"></button>
+<section class="final-cta">
+  <div class="container">
+    <h2>¿Listo para llevar el control de tu trabajo?</h2>
+    <p>Organiza tus jornadas y conoce mejor tus resultados con MOVÍ.</p>
+    <a class="btn btn-gold" href="https://mov-control-de-ganancias.ai.studio" target="_blank" rel="noopener">Comenzar hoy con MOVÍ →</a>
+  </div>
+</section>
 
 </main>
 
-<!-- VENTANAS INFORMATIVAS -->
+<footer>
+  <div class="container footer-inner">
+    <a href="#inicio" class="logo">MOVÍ<span>.</span></a>
+    <div class="copyright">Tu trabajo, bajo control. · © 2026 MOVÍ. Todos los derechos reservados.</div>
+    <div class="footer-links">
+      <button onclick="openModal('privacidad')">Privacidad</button>
+      <button onclick="openModal('terminos')">Términos</button>
+      <button onclick="openModal('ayuda')">Ayuda</button>
+    </div>
+  </div>
+</footer>
 
-<div class="modal" id="modal" onclick="outside(event)">
-
-<section class="panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-
-<button class="close" onclick="hide()" aria-label="Cerrar">×</button>
-
-<div id="modal-content"></div>
-
-</section>
+<div class="modal" id="infoModal" onclick="outsideClose(event)">
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">×</button>
+    <div id="modalContent"></div>
+  </div>
 </div>
 
 <script>
+const APP_URL="https://mov-control-de-ganancias.ai.studio";
+const WHATSAPP_URL="https://wa.me/573236500268";
 
-const APP="https://mov-control-de-ganancias.ai.studio";
-const WA="https://wa.me/573236500268";
-
-const pages={
-
-nosotros:`
-<h2 id="modal-title">Conoce MOVÍ</h2>
-<p>MOVÍ es una herramienta creada para ayudar a los conductores de plataformas de transporte a organizar y entender mejor los resultados de su trabajo.</p>
-<p>Reúne en un solo lugar el registro de ingresos, gastos, kilómetros recorridos y metas, para que consultes tu actividad con mayor claridad.</p>
-<a class="action" href="${APP}" target="_blank" rel="noopener">Abrir MOVÍ</a>
-`,
-
-funciones:`
-<h2 id="modal-title">Todo tu trabajo en un solo lugar</h2>
-<h3>Ingresos</h3>
-<p>Registra lo que recibes de tus aplicaciones y consulta tus resultados.</p>
-<h3>Gastos</h3>
-<p>Organiza combustible, cuota del vehículo y otros costos de tu actividad.</p>
-<h3>Kilómetros</h3>
-<p>Lleva el control de tus recorridos y consulta el costo aproximado por kilómetro.</p>
-<h3>Metas</h3>
-<p>Define objetivos diarios y mensuales y revisa tu avance.</p>
-<a class="action" href="${APP}" target="_blank" rel="noopener">Conocer MOVÍ</a>
-`,
-
-ingresos:`
-<h2 id="modal-title">Control de ingresos</h2>
-<p>Registra los ingresos de tus aplicaciones de transporte, organiza tus jornadas y consulta cuánto produces por día y durante el mes.</p>
-<a class="action" href="${APP}" target="_blank" rel="noopener">Abrir MOVÍ</a>
-`,
-
-gastos:`
-<h2 id="modal-title">Control de gastos</h2>
-<p>Registra combustible, cuota del vehículo y otros gastos relacionados con tu actividad. Consulta cómo influyen en el resultado de tu trabajo.</p>
-<a class="action" href="${APP}" target="_blank" rel="noopener">Abrir MOVÍ</a>
-`,
-
-kilometros:`
-<h2 id="modal-title">Control de kilómetros</h2>
-<p>Registra tus recorridos y consulta el costo aproximado por kilómetro para tener una mejor referencia de tus costos de operación.</p>
-<a class="action" href="${APP}" target="_blank" rel="noopener">Abrir MOVÍ</a>
-`,
-
-metas:`
-<h2 id="modal-title">Tus metas, bajo control</h2>
-<p>Define objetivos diarios y mensuales, revisa tu avance y consulta cuánto te falta para alcanzar tus metas.</p>
-<a class="action" href="${APP}" target="_blank" rel="noopener">Abrir MOVÍ</a>
-`,
-
-planes:`
-<h2 id="modal-title">Planes MOVÍ</h2>
-<h3>Plan mensual · $9.900 COP</h3>
-<p>Acceso durante 30 días.</p>
-<h3>Plan anual · $79.000 COP</h3>
-<p>Acceso durante 365 días.</p>
-<p>Consulta las condiciones y completa la contratación desde la aplicación.</p>
-<a class="action" href="${APP}" target="_blank" rel="noopener">Ver planes en MOVÍ</a>
-`,
-
-instalacion:`
-<h2 id="modal-title">Instala MOVÍ en tu celular</h2>
-<h3>Android</h3>
-<ol>
-<li>Abre MOVÍ en Google Chrome.</li>
-<li>Pulsa los tres puntos del menú.</li>
-<li>Elige “Instalar aplicación” o “Agregar a pantalla de inicio”, si aparece.</li>
-<li>Abre MOVÍ desde el icono de tu pantalla.</li>
-</ol>
-<h3>iPhone</h3>
-<ol>
-<li>Abre MOVÍ en un navegador compatible.</li>
-<li>Usa la opción de compartir.</li>
-<li>Si está disponible, selecciona “Agregar a pantalla de inicio”.</li>
-<li>Abre MOVÍ desde el icono.</li>
-</ol>
-<p class="note">Las opciones pueden variar según el dispositivo, navegador y versión.</p>
-<a class="action" href="${APP}" target="_blank" rel="noopener">Abrir MOVÍ</a>
-`,
-
+const modalPages={
 privacidad:`
-<h2 id="modal-title">Política de privacidad</h2>
-<p>MOVÍ utiliza la información que el usuario proporciona al crear su cuenta y al usar la aplicación, como registros de ingresos, gastos, kilómetros, metas, país, moneda y plataformas seleccionadas.</p>
+<h2 id="modalTitle">Política de privacidad</h2>
+<p>MOVÍ utiliza la información que el usuario proporciona al crear su cuenta y al utilizar la aplicación, como registros de ingresos, gastos, kilómetros, metas, país, moneda y plataformas seleccionadas.</p>
 <h3>Uso de la información</h3>
 <p>Los datos se utilizan para prestar las funciones de registro, organización y consulta de la actividad del usuario, gestionar su cuenta y brindar soporte.</p>
 <h3>Almacenamiento</h3>
 <p>MOVÍ utiliza servicios tecnológicos de autenticación y almacenamiento en la nube para gestionar las cuentas y la información asociada.</p>
 <h3>Pagos</h3>
 <p>Los pagos de los planes se procesan mediante los medios habilitados en la aplicación, incluido Wompi. La transacción también está sujeta a las condiciones y políticas del proveedor de pagos.</p>
-<h3>Consultas</h3>
-<p>Para consultas sobre privacidad o tratamiento de datos, comunícate con MOVÍ.</p>
-<a class="action" href="${WA}" target="_blank" rel="noopener">Contactar a MOVÍ</a>
-<p class="note">Este texto es una base informativa. Antes de publicarlo como política definitiva, debe revisarse y completarse con la identidad y datos legales del responsable del tratamiento.</p>
+<h3>Contacto</h3>
+<p>Para consultas sobre privacidad o tratamiento de datos, comunícate con el equipo de MOVÍ.</p>
+<a class="btn btn-gold" href="${WHATSAPP_URL}" target="_blank" rel="noopener">Contactar a MOVÍ</a>
+<p class="note">Este texto es una base inicial y debe completarse con la identidad y los datos legales del responsable del tratamiento antes de publicarse como política definitiva.</p>
 `,
-
 terminos:`
-<h2 id="modal-title">Términos y condiciones</h2>
+<h2 id="modalTitle">Términos y condiciones</h2>
 <h3>Uso del servicio</h3>
 <p>MOVÍ ofrece herramientas para registrar y consultar ingresos, gastos, kilómetros y metas relacionadas con la actividad del usuario.</p>
 <h3>Cuenta e información</h3>
 <p>El usuario es responsable de mantener la seguridad de sus credenciales y de la exactitud de la información que registra.</p>
 <h3>Planes y pagos</h3>
 <p>Los precios, periodos y condiciones de acceso se presentan en la aplicación. La activación del plan se realiza mediante los medios de pago habilitados.</p>
-<h3>Alcance</h3>
+<h3>Alcance del servicio</h3>
 <p>MOVÍ es una herramienta de organización y seguimiento. No garantiza ingresos, ganancias ni resultados económicos. Los reportes dependen de los datos ingresados por el usuario.</p>
 <h3>Soporte</h3>
 <p>Para consultas sobre el servicio, contacta al equipo de MOVÍ.</p>
-<a class="action" href="${WA}" target="_blank" rel="noopener">Contactar a MOVÍ</a>
-<p class="note">Estos términos son una base informativa y deben revisarse legalmente y completarse antes de su publicación definitiva.</p>
+<a class="btn btn-gold" href="${WHATSAPP_URL}" target="_blank" rel="noopener">Contactar a MOVÍ</a>
+<p class="note">Estos términos son una base inicial y deben revisarse y completarse legalmente antes de su publicación definitiva.</p>
 `,
-
 ayuda:`
-<h2 id="modal-title">¿Necesitas ayuda?</h2>
+<h2 id="modalTitle">¿Necesitas ayuda?</h2>
 <p>Si tienes dificultades para ingresar, instalar MOVÍ, consultar tus planes o realizar un pago, escríbenos por WhatsApp.</p>
-<a class="action" href="${WA}" target="_blank" rel="noopener">Hablar con MOVÍ por WhatsApp</a>
+<a class="btn btn-gold" href="${WHATSAPP_URL}" target="_blank" rel="noopener">Hablar con MOVÍ por WhatsApp</a>
 `
-
 };
 
-function show(key){
-if(!pages[key])return;
-document.getElementById("modal-content").innerHTML=pages[key];
-document.getElementById("modal").classList.add("open");
-document.body.style.overflow="hidden";
+function openModal(page){
+  if(!modalPages[page])return;
+  document.getElementById("modalContent").innerHTML=modalPages[page];
+  document.getElementById("infoModal").classList.add("open");
+  document.body.style.overflow="hidden";
 }
-
-function hide(){
-document.getElementById("modal").classList.remove("open");
-document.body.style.overflow="";
+function closeModal(){
+  document.getElementById("infoModal").classList.remove("open");
+  document.body.style.overflow="";
 }
-
-function outside(e){
-if(e.target.id==="modal")hide();
+function outsideClose(event){
+  if(event.target.id==="infoModal")closeModal();
 }
-
-function topPage(){
-window.scrollTo({top:0,behavior:"smooth"});
-}
-
-document.addEventListener("keydown",e=>{
-if(e.key==="Escape")hide();
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape")closeModal();
 });
 
+const menuBtn=document.getElementById("menuBtn");
+const navLinks=document.getElementById("navLinks");
+menuBtn.addEventListener("click",()=>{
+  const opened=navLinks.classList.toggle("open");
+  menuBtn.setAttribute("aria-expanded",String(opened));
+});
+navLinks.querySelectorAll("a").forEach(link=>{
+  link.addEventListener("click",()=>{
+    navLinks.classList.remove("open");
+    menuBtn.setAttribute("aria-expanded","false");
+  });
+});
 </script>
 
 </body>
