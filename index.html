@@ -4,121 +4,479 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101010">
 <title>MOVÍ | Tu trabajo, bajo control</title>
-<meta name="description" content="MOVÍ es la aplicación para conductores de plataformas que permite controlar ingresos, gastos, kilómetros y metas de trabajo.">
+<meta name="description" content="MOVÍ ayuda a conductores de Uber, DiDi y otras plataformas a controlar ingresos, gastos, kilómetros y metas desde una sola aplicación.">
+<link rel="canonical" href="https://moviconductor.co/">
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#101010;color:#f5f5f5;font-family:Arial,sans-serif;line-height:1.6}
-header{padding:25px 8%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #303030}
-.logo{font-size:30px;font-weight:800;letter-spacing:3px;color:#ddd}
-nav a{color:#ccc;text-decoration:none;margin-left:22px;font-size:14px}
-.hero{text-align:center;padding:100px 20px 90px;background:linear-gradient(145deg,#1d1d1d,#090909)}
-.hero h1{font-size:54px;letter-spacing:5px;margin:0}
-.hero h2{font-size:25px;font-weight:400;color:#c5c5c5}
-.hero p{max-width:650px;margin:20px auto;color:#aaa}
-.button{display:inline-block;background:#ddd;color:#111;padding:13px 27px;border-radius:5px;text-decoration:none;font-weight:bold;margin-top:15px}
-section{padding:65px 8%;max-width:1100px;margin:auto}
-h2{text-align:center;font-size:30px}
-.intro{text-align:center;color:#aaa;max-width:750px;margin:15px auto 35px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
-.card{background:#1c1c1c;border:1px solid #383838;border-radius:10px;padding:25px}
-.card h3{color:#ddd}
+:root {
+  --bg:#101010;
+  --panel:#1b1b1b;
+  --panel2:#222;
+  --silver:#d5d5d5;
+  --white:#f7f7f7;
+  --muted:#aaa;
+  --green:#a8c99a;
+  --border:#353535;
+}
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--white);
+  font-family:Arial,Helvetica,sans-serif;line-height:1.65
+}
+a{color:inherit}
+header{
+  padding:18px 7%;display:flex;justify-content:space-between;
+  align-items:center;border-bottom:1px solid var(--border);
+  background:#101010;position:sticky;top:0;z-index:10
+}
+.logo{font-size:30px;font-weight:900;letter-spacing:3px;color:var(--silver)}
+nav{display:flex;gap:20px;flex-wrap:wrap}
+nav a{color:#ccc;text-decoration:none;font-size:13px}
+nav a:hover{color:white}
+.hero{
+  min-height:530px;padding:90px 20px;display:flex;
+  align-items:center;justify-content:center;text-align:center;
+  background:radial-gradient(ellipse at 50% 30%,#343434 0%,#191919 45%,#090909 100%);
+  border-bottom:1px solid #303030
+}
+.hero-content{max-width:760px}
+.hero .eyebrow{
+  color:var(--green);letter-spacing:4px;text-transform:uppercase;
+  font-size:12px;font-weight:bold
+}
+.hero h1{font-size:76px;letter-spacing:9px;margin:8px 0;color:#e6e6e6}
+.hero h2{font-size:29px;font-weight:400;margin:0;color:#ddd}
+.hero p{max-width:650px;margin:22px auto;color:#bbb;font-size:17px}
+.button{
+  display:inline-block;padding:14px 25px;border-radius:7px;
+  background:linear-gradient(135deg,#eee,#aaa);color:#111;
+  text-decoration:none;font-weight:bold;margin:8px 5px;
+  transition:transform .2s,filter .2s
+}
+.button:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.button.secondary{background:transparent;color:#eee;border:1px solid #777}
+.button.green{background:#a8c99a;color:#111}
+section{padding:75px 8%;max-width:1180px;margin:auto}
+h2.section-title{text-align:center;font-size:32px;margin:0 0 12px}
+.intro{text-align:center;color:var(--muted);max-width:760px;margin:0 auto 35px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{
+  background:var(--panel);border:1px solid var(--border);
+  border-radius:12px;padding:25px
+}
+.card h3{color:var(--silver);margin-top:0}
 .card p{color:#aaa;font-size:14px}
-.price{font-size:30px;font-weight:bold;color:#eee}
+.feature{cursor:pointer}
+.feature summary{list-style:none;font-size:19px;font-weight:bold;color:#ddd}
+.feature summary::-webkit-details-marker{display:none}
+.feature summary:after{content:"＋";float:right;color:var(--green)}
+.feature[open] summary:after{content:"−"}
+.feature[open]{border-color:#777}
+.feature p{margin-bottom:0}
 .price-card{text-align:center}
+.price{font-size:34px;font-weight:bold;color:#eee;margin:12px 0 0}
 .price-card small{color:#aaa}
-.privacy{background:#191919;border-radius:10px;padding:25px;color:#bbb;font-size:14px}
-footer{text-align:center;padding:30px;border-top:1px solid #333;color:#888;font-size:13px}
-@media(max-width:600px){
-header{padding:20px;display:block;text-align:center}
-nav{margin-top:12px}
-nav a{margin:0 7px;font-size:12px}
-.hero h1{font-size:42px}
-.hero h2{font-size:21px}
-section{padding:45px 20px}
+.price-card .button{display:block;margin-top:22px}
+.highlight{border-color:#888;background:linear-gradient(145deg,#242424,#171717)}
+.note{font-size:12px;color:#888;text-align:center;margin-top:18px}
+.panel{
+  background:#191919;border:1px solid var(--border);
+  border-radius:12px;padding:28px;margin-top:25px
+}
+.panel h3{color:#ddd;margin-top:22px}
+.panel p,.panel li{color:#bbb;font-size:14px}
+.panel a{color:var(--green)}
+.steps{counter-reset:step}
+.step{
+  background:#1b1b1b;border:1px solid #383838;
+  padding:20px;border-radius:10px;margin:12px 0
+}
+.step h3{margin:0 0 8px;color:#ddd}
+.step p{margin:0;color:#aaa;font-size:14px}
+.step h3:before{
+  counter-increment:step;content:counter(step) ". ";
+  color:var(--green)
+}
+.contact{text-align:center;background:#191919;border-radius:14px;padding:35px}
+footer{
+  border-top:1px solid #333;text-align:center;
+  padding:35px 20px;color:#888;font-size:13px
+}
+footer a{color:#bbb;text-decoration:none;margin:0 8px}
+hr{border:0;border-top:1px solid #333;margin:25px 0}
+@media(max-width:700px){
+  header{position:relative;display:block;text-align:center;padding:16px}
+  nav{justify-content:center;gap:12px;margin-top:12px}
+  nav a{font-size:12px}
+  .hero{min-height:450px;padding:65px 20px}
+  .hero h1{font-size:55px}
+  .hero h2{font-size:23px}
+  .hero p{font-size:15px}
+  section{padding:52px 20px}
+  h2.section-title{font-size:27px}
 }
 </style>
 </head>
+
 <body>
 
 <header>
-<div class="logo">MOVÍ</div>
-<nav>
-<a href="#nosotros">Nosotros</a>
-<a href="#funciones">Funciones</a>
-<a href="#planes">Planes</a>
-<a href="#privacidad">Privacidad</a>
-</nav>
+  <div class="logo">MOVÍ</div>
+  <nav>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#funciones">Funciones</a>
+    <a href="#planes">Planes</a>
+    <a href="#instalacion">Instalación</a>
+    <a href="#privacidad">Privacidad</a>
+    <a href="#terminos">Términos</a>
+  </nav>
 </header>
 
+<main>
+
 <div class="hero">
-<h1>MOVÍ</h1>
-<h2>Tu trabajo, bajo control.</h2>
-<p>La herramienta para conductores de plataformas que quieren organizar sus ingresos, controlar sus gastos, conocer sus kilómetros y alcanzar sus metas.</p>
-<a class="button" href="#funciones">Conoce MOVÍ</a>
+  <div class="hero-content">
+    <div class="eyebrow">Tecnología para conductores</div>
+    <h1>MOVÍ</h1>
+    <h2>Tu trabajo, bajo control.</h2>
+    <p>
+      La herramienta para conductores de plataformas que quieren
+      organizar sus ingresos, controlar sus gastos, conocer sus
+      kilómetros y alcanzar sus metas.
+    </p>
+    <a class="button" href="#funciones">Conoce MOVÍ</a>
+    <a class="button green" href="https://mov-control-de-ganancias.ai.studio"
+       target="_blank" rel="noopener">Descargar aplicación ↗</a>
+    <p class="note">Diseñada para conductores de Uber, DiDi y otras plataformas.</p>
+  </div>
 </div>
 
 <section id="nosotros">
-<h2>Más control de tu trabajo</h2>
-<p class="intro">MOVÍ nace para ayudar a los conductores de plataformas de transporte a conocer mejor sus resultados y tomar decisiones con información clara.</p>
+  <h2 class="section-title">Más control de tu trabajo</h2>
+  <p class="intro">
+    MOVÍ nace para ayudar a los conductores de plataformas de transporte
+    a conocer mejor sus resultados, organizar sus jornadas y tomar
+    decisiones con información clara.
+  </p>
+  <div class="contact">
+    <h3>Tu trabajo merece estar organizado.</h3>
+    <p>Registra tu actividad y consulta tus resultados desde un solo lugar.</p>
+    <a class="button" href="https://mov-control-de-ganancias.ai.studio"
+       target="_blank" rel="noopener">Conoce la aplicación</a>
+  </div>
 </section>
 
 <section id="funciones">
-<h2>Todo en un solo lugar</h2>
-<div class="cards">
-<div class="card">
-<h3>Ingresos</h3>
-<p>Registra y consulta tus ingresos diarios de las diferentes aplicaciones de transporte.</p>
-</div>
-<div class="card">
-<h3>Gastos</h3>
-<p>Organiza tus gastos de combustible, vehículo y otros costos de trabajo.</p>
-</div>
-<div class="card">
-<h3>Kilómetros</h3>
-<p>Lleva el control de los kilómetros recorridos y su costo.</p>
-</div>
-<div class="card">
-<h3>Metas</h3>
-<p>Define tus objetivos mensuales y consulta cómo avanzas para alcanzarlos.</p>
-</div>
-</div>
+  <h2 class="section-title">Todo en un solo lugar</h2>
+  <p class="intro">Pulsa cada función para conocer cómo te ayuda MOVÍ.</p>
+  <div class="cards">
+
+    <details class="card feature">
+      <summary>Ingresos</summary>
+      <p>Registra y consulta los ingresos diarios de las diferentes
+      aplicaciones de transporte. Lleva un seguimiento de tus jornadas
+      y conoce cuánto estás generando.</p>
+    </details>
+
+    <details class="card feature">
+      <summary>Gastos</summary>
+      <p>Organiza los gastos de combustible, vehículo y otros costos
+      relacionados con tu actividad. Identifica cuánto dinero destinas
+      a trabajar.</p>
+    </details>
+
+    <details class="card feature">
+      <summary>Kilómetros</summary>
+      <p>Lleva el control de los kilómetros recorridos y consulta
+      el costo aproximado por kilómetro según tu configuración.</p>
+    </details>
+
+    <details class="card feature">
+      <summary>Metas</summary>
+      <p>Define tus objetivos diarios y mensuales. Consulta tu avance
+      y organiza tu trabajo para acercarte a tus metas.</p>
+    </details>
+
+  </div>
 </section>
 
 <section id="planes">
-<h2>Planes MOVÍ</h2>
-<p class="intro">Elige el periodo que mejor se adapte a tu trabajo.</p>
-<div class="cards">
-<div class="card price-card">
-<h3>Mensual</h3>
-<div class="price">$9.900</div>
-<small>COP / 30 días</small>
-</div>
-<div class="card price-card">
-<h3>Anual</h3>
-<div class="price">$79.000</div>
-<small>COP / 365 días</small>
-</div>
-</div>
+  <h2 class="section-title">Planes MOVÍ</h2>
+  <p class="intro">Escoge el periodo que mejor se adapte a tu trabajo.</p>
+
+  <div class="cards">
+    <div class="card price-card">
+      <h3>Plan mensual</h3>
+      <div class="price">$9.900</div>
+      <small>COP · 30 días</small>
+      <p>Acceso al servicio durante el periodo contratado.</p>
+      <a class="button secondary" href="https://mov-control-de-ganancias.ai.studio"
+         target="_blank" rel="noopener">Elegir plan</a>
+    </div>
+
+    <div class="card price-card highlight">
+      <h3>Plan anual</h3>
+      <div class="price">$79.000</div>
+      <small>COP · 365 días</small>
+      <p>Acceso al servicio durante un año completo.</p>
+      <a class="button green" href="https://mov-control-de-ganancias.ai.studio"
+         target="_blank" rel="noopener">Elegir plan</a>
+    </div>
+  </div>
+  <p class="note">
+    Los pagos y la activación de los planes se gestionan dentro de la aplicación
+    mediante los medios de pago habilitados, incluido Wompi.
+  </p>
+</section>
+
+<section id="instalacion">
+  <h2 class="section-title">Instala MOVÍ en tu celular</h2>
+  <p class="intro">
+    Puedes acceder desde Google Chrome en Android o iPhone.
+    Sigue las instrucciones de acuerdo con tu dispositivo.
+  </p>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Android</h3>
+      <div class="steps">
+        <div class="step">
+          <h3>Abre MOVÍ en Chrome</h3>
+          <p>Entra a la aplicación desde el enlace oficial.</p>
+        </div>
+        <div class="step">
+          <h3>Abre el menú</h3>
+          <p>Pulsa los tres puntos de la parte superior derecha de Chrome.</p>
+        </div>
+        <div class="step">
+          <h3>Instala la aplicación</h3>
+          <p>Selecciona «Instalar aplicación» o «Agregar a pantalla de inicio»,
+          si aparece esa opción, y confirma.</p>
+        </div>
+        <div class="step">
+          <h3>Abre MOVÍ</h3>
+          <p>Busca el icono de MOVÍ en la pantalla de inicio de tu celular.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>iPhone</h3>
+      <div class="steps">
+        <div class="step">
+          <h3>Abre MOVÍ en Chrome</h3>
+          <p>Entra a la aplicación desde el enlace oficial.</p>
+        </div>
+        <div class="step">
+          <h3>Pulsa compartir</h3>
+          <p>Utiliza el icono de compartir del navegador para abrir
+          las opciones disponibles de iOS.</p>
+        </div>
+        <div class="step">
+          <h3>Agrega a inicio</h3>
+          <p>Si aparece «Agregar a pantalla de inicio», selecciónalo
+          y confirma la acción.</p>
+        </div>
+        <div class="step">
+          <h3>Abre MOVÍ</h3>
+          <p>Busca el icono de MOVÍ en la pantalla de inicio de tu iPhone.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="note">
+    Las opciones pueden variar según la versión de Chrome y del sistema operativo.
+    Si la opción de instalación no aparece, puedes seguir utilizando MOVÍ
+    desde el navegador.
+  </p>
+  <div style="text-align:center;margin-top:25px">
+    <a class="button green" href="https://mov-control-de-ganancias.ai.studio"
+       target="_blank" rel="noopener">Abrir MOVÍ ↗</a>
+  </div>
 </section>
 
 <section id="privacidad">
-<h2>Política de privacidad</h2>
-<div class="privacy">
-<p><strong>Responsable:</strong> MOVÍ.</p>
-<p><strong>Finalidad:</strong> La información proporcionada por los usuarios se utiliza para permitir el funcionamiento de la aplicación, gestionar sus cuentas y ofrecer las funciones de registro y consulta de ingresos, gastos, kilómetros y metas.</p>
-<p><strong>Información:</strong> La aplicación puede tratar datos de cuenta y los registros que el usuario introduce para utilizar sus funciones.</p>
-<p><strong>Protección:</strong> MOVÍ aplica medidas de seguridad para proteger la información. El acceso a los datos debe realizarse conforme a los permisos y condiciones del servicio.</p>
-<p><strong>Derechos del usuario:</strong> Los usuarios pueden solicitar información sobre el tratamiento de sus datos, así como ejercer los derechos de consulta, actualización, rectificación o eliminación conforme a la legislación aplicable.</p>
-<p><strong>Contacto:</strong> Para consultas sobre privacidad, utiliza los canales de contacto oficiales de MOVÍ.</p>
-<p>Esta política deberá actualizarse para reflejar con precisión las prácticas reales de tratamiento de datos de la aplicación.</p>
-</div>
+  <h2 class="section-title">Política de privacidad</h2>
+  <div class="panel">
+    <p><strong>Última actualización:</strong> 5 de noviembre de 2026.</p>
+
+    <h3>1. Responsable del tratamiento</h3>
+    <p>MOVÍ es el servicio digital destinado a conductores de plataformas
+    de transporte. Para consultas sobre privacidad y tratamiento de datos,
+    el usuario puede comunicarse mediante el canal de atención oficial
+    indicado al final de esta página.</p>
+
+    <h3>2. Información que podemos tratar</h3>
+    <p>Para prestar el servicio, MOVÍ puede tratar información de registro
+    y autenticación, como correo electrónico y datos básicos de la cuenta.
+    También puede almacenar la información que el conductor introduce
+    voluntariamente en la aplicación, como ingresos, gastos, kilómetros,
+    metas, país, moneda, plataformas de trabajo y configuración del vehículo.</p>
+
+    <h3>3. Finalidades</h3>
+    <ul>
+      <li>Crear y administrar las cuentas de los usuarios.</li>
+      <li>Permitir el acceso y la autenticación mediante correo o Google.</li>
+      <li>Registrar y presentar ingresos, gastos, kilómetros y metas.</li>
+      <li>Guardar las configuraciones personales de cada conductor.</li>
+      <li>Gestionar los planes, pagos y estados de suscripción.</li>
+      <li>Atender solicitudes de soporte y consultas de los usuarios.</li>
+      <li>Mantener la seguridad y el funcionamiento del servicio.</li>
+    </ul>
+
+    <h3>4. Servicios tecnológicos y terceros</h3>
+    <p>MOVÍ utiliza servicios tecnológicos para operar. Entre ellos,
+    Supabase para infraestructura de datos y autenticación, Google para
+    el inicio de sesión cuando el usuario elige esa opción y Wompi para
+    procesar los pagos habilitados. Estos servicios pueden tratar información
+    conforme a sus propias políticas y a las instrucciones necesarias
+    para prestar sus funciones.</p>
+
+    <h3>5. Pagos</h3>
+    <p>Los pagos de los planes se gestionan mediante Wompi. El tratamiento
+    de la información necesaria para procesar una transacción también
+    está sujeto a las políticas y condiciones del proveedor de pagos.
+    MOVÍ utiliza la información de la transacción para gestionar el acceso
+    al plan contratado.</p>
+
+    <h3>6. Almacenamiento y seguridad</h3>
+    <p>MOVÍ utiliza medidas técnicas y organizativas destinadas a proteger
+    la información y limitar el acceso a los datos de cada cuenta.
+    Ningún sistema conectado a internet puede garantizar seguridad absoluta.</p>
+
+    <h3>7. Conservación de la información</h3>
+    <p>La información se conserva durante el tiempo necesario para prestar
+    el servicio, administrar la cuenta, atender obligaciones aplicables
+    y resolver solicitudes o controversias. Cuando corresponda, podrá
+    eliminarse o anonimizarse.</p>
+
+    <h3>8. Derechos de los usuarios</h3>
+    <p>Los usuarios pueden solicitar consulta, actualización, corrección
+    o eliminación de sus datos personales, así como ejercer los demás
+    derechos que les reconozca la legislación aplicable. Las solicitudes
+    serán atendidas a través del canal de contacto oficial.</p>
+
+    <h3>9. Cambios en esta política</h3>
+    <p>MOVÍ podrá actualizar esta política cuando cambien sus funciones,
+    proveedores o prácticas de tratamiento. La versión vigente estará
+    disponible en esta página.</p>
+
+    <h3>10. Contacto</h3>
+    <p>Para consultas, solicitudes de privacidad o ejercicio de derechos,
+    comunícate con el equipo de MOVÍ mediante
+    <a href="https://wa.me/573236500268" target="_blank" rel="noopener">
+    nuestro canal de atención al cliente por WhatsApp</a>.</p>
+  </div>
 </section>
 
+<section id="terminos">
+  <h2 class="section-title">Términos y condiciones</h2>
+  <div class="panel">
+    <p><strong>Última actualización:</strong> 5 de noviembre de 2026.</p>
+
+    <h3>1. Aceptación</h3>
+    <p>Al registrarse, acceder o utilizar MOVÍ, el usuario acepta estos
+    términos y la política de privacidad. Si no está de acuerdo,
+    debe abstenerse de utilizar el servicio.</p>
+
+    <h3>2. Descripción del servicio</h3>
+    <p>MOVÍ es una herramienta digital que permite a conductores de
+    plataformas organizar información sobre ingresos, gastos, kilómetros
+    recorridos y metas de trabajo. MOVÍ es una herramienta de registro
+    y seguimiento; no garantiza ingresos, ganancias ni resultados económicos.</p>
+
+    <h3>3. Registro y cuenta</h3>
+    <p>El usuario debe proporcionar información correcta y mantener
+    la confidencialidad de sus credenciales. Cada usuario es responsable
+    de la actividad realizada desde su cuenta y debe informar cualquier
+    uso no autorizado.</p>
+
+    <h3>4. Uso de la información</h3>
+    <p>El usuario es responsable de la exactitud de los datos que introduce.
+    Los cálculos y reportes dependen de la información registrada y de
+    las configuraciones seleccionadas por el propio conductor.</p>
+
+    <h3>5. Planes y precios</h3>
+    <ul>
+      <li>Plan mensual: $9.900 COP por 30 días.</li>
+      <li>Plan anual: $79.000 COP por 365 días.</li>
+      <li>La aplicación puede ofrecer una prueba gratuita de 7 días
+      cuando esta opción esté habilitada para la cuenta.</li>
+    </ul>
+    <p>Las condiciones aplicables a cada compra se mostrarán durante
+    el proceso de contratación. El acceso a las funciones de pago depende
+    de la confirmación de la transacción y del estado del plan.</p>
+
+    <h3>6. Pagos y activación</h3>
+    <p>Los pagos se procesan mediante los medios habilitados en la aplicación,
+    incluido Wompi. La activación del plan está sujeta a la confirmación
+    válida del pago. Ante problemas con una transacción o activación,
+    el usuario puede contactar al servicio de atención.</p>
+
+    <h3>7. Cancelaciones y solicitudes</h3>
+    <p>Las solicitudes relacionadas con pagos, cancelaciones, acceso
+    o membresías pueden presentarse por el canal de atención de MOVÍ.
+    Se atenderán conforme a las condiciones informadas al contratar
+    y a los derechos reconocidos por la legislación aplicable.</p>
+
+    <h3>8. Uso adecuado</h3>
+    <p>El usuario se compromete a no utilizar MOVÍ para actividades
+    ilegales, intentar acceder a cuentas ajenas, interferir con la seguridad
+    del servicio ni realizar acciones que afecten su funcionamiento.</p>
+
+    <h3>9. Disponibilidad y actualizaciones</h3>
+    <p>MOVÍ procurará mantener el servicio disponible y actualizado.
+    Podrán presentarse interrupciones por mantenimiento, fallas técnicas
+    o circunstancias externas. Se realizarán esfuerzos razonables para
+    restablecer el servicio.</p>
+
+    <h3>10. Propiedad intelectual</h3>
+    <p>La marca, diseño, contenidos y elementos propios de MOVÍ están
+    protegidos por las normas aplicables. No se autoriza su reproducción
+    o explotación no autorizada.</p>
+
+    <h3>11. Responsabilidad</h3>
+    <p>MOVÍ es una herramienta de apoyo para organizar información.
+    No sustituye los registros contables, tributarios ni las decisiones
+    financieras del usuario. El conductor debe verificar la información
+    y los resultados antes de tomar decisiones.</p>
+
+    <h3>12. Modificaciones</h3>
+    <p>Estos términos podrán actualizarse cuando sea necesario.
+    La versión vigente estará disponible en esta página.</p>
+
+    <h3>13. Contacto</h3>
+    <p>Para preguntas, solicitudes o asistencia, utiliza
+    <a href="https://wa.me/573236500268" target="_blank" rel="noopener">
+    el canal oficial de atención de MOVÍ por WhatsApp</a>.</p>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="contact">
+    <h2 class="section-title">¿Necesitas ayuda?</h2>
+    <p class="intro">Nuestro equipo de atención está disponible para ayudarte.</p>
+    <a class="button green" href="https://wa.me/573236500268"
+       target="_blank" rel="noopener">Atención al cliente por WhatsApp</a>
+    <br>
+    <a class="button" href="https://mov-control-de-ganancias.ai.studio"
+       target="_blank" rel="noopener">Entrar a MOVÍ ↗</a>
+  </div>
+</section>
+
+</main>
+
 <footer>
-<strong>MOVÍ</strong><br>
-Tu trabajo, bajo control.<br>
-© 2026 MOVÍ. Todos los derechos reservados.
+  <strong style="color:#ddd;letter-spacing:3px">MOVÍ</strong><br>
+  Tu trabajo, bajo control.<br>
+  © 2026 MOVÍ. Todos los derechos reservados.
+  <hr>
+  <a href="#privacidad">Política de privacidad</a>
+  <a href="#terminos">Términos y condiciones</a>
+  <a href="https://wa.me/573236500268" target="_blank" rel="noopener">Atención al cliente</a>
 </footer>
 
 </body>
