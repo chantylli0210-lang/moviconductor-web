@@ -34,6 +34,69 @@ footer{padding:30px 0;background:#060809}.footer-inner{display:flex;align-items:
 @media(max-width:950px){.hero-grid{min-height:540px;gap:12px}.device-stage{height:400px}.features{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:700px){html{scroll-padding-top:72px}.nav{height:62px}.brand{font-size:26px}.nav-enter{padding:9px 12px;font-size:12px}.menu-btn{padding:8px 11px}.hero-grid{grid-template-columns:1fr;padding:42px 0 25px;gap:12px}.hero h1{font-size:clamp(38px,10vw,52px)}.hero-copy p{font-size:15px}.hero-actions{display:grid;grid-template-columns:1fr}.device-stage{height:365px;margin-top:8px}.tablet{width:90%;left:0;max-width:450px}.phone{right:0;width:29%;max-width:145px}.device-caption{bottom:0;left:0}.hero-proof{gap:10px 18px;font-size:11px}section{padding:55px 0}.problem-cards,.steps,.pricing,.install-grid{grid-template-columns:1fr}.problem-card{padding:21px}.features{grid-template-columns:1fr 1fr;gap:10px}.feature{padding:17px 14px;min-height:200px}.feature h3{font-size:17px}.feature p{font-size:13px}.plan{padding:23px}.price{font-size:38px}.footer-inner{flex-direction:column;text-align:center}.footer-links{justify-content:center}.float-actions{right:12px;bottom:12px}.float-download{font-size:11px;padding:10px 13px}.float-wa{width:48px;height:48px}.modal-panel{padding:24px 19px}}
 @media(max-width:390px){.features{grid-template-columns:1fr}.device-stage{height:320px}.phone{width:31%}.nav-enter{font-size:11px;padding:8px 10px}}
+
+/* ACABADO PREMIUM MOVÍ: contraste, tipografía y metal */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+:root{--bg:#050708;--surface:#0b0f11;--panel:#101619;--line:#39434a;--silver:#d5dce1;--muted:#aeb9c0;--green:#43e3a0;--green2:#087b53;--red:#ff6872;--red2:#922b35;--white:#f4f7f8;--shadow:0 24px 70px #000c}
+body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;background:radial-gradient(ellipse at 10% 12%,#12332620,transparent 30%),#050708;letter-spacing:-.012em}
+h1,h2,h3,.brand,.price,.nav-enter,.btn{font-family:'Space Grotesk','Inter',sans-serif}
+header{background:rgba(5,7,8,.91);border-bottom:1px solid #66727a55;box-shadow:0 8px 30px #0005}
+.brand{font-size:31px;letter-spacing:-2px;text-shadow:0 0 22px #dce5eb22}
+.brand span{color:var(--green);text-shadow:0 0 18px #43e3a077}
+.menu-btn{background:linear-gradient(145deg,#171e22,#090d0f);border-color:#68757d;color:#f2f6f8;box-shadow:inset 0 1px #ffffff12,0 5px 18px #0008}
+.menu-panel{background:linear-gradient(145deg,#151c20,#080b0d);border-color:#68757d;box-shadow:0 24px 70px #000e,0 0 25px #35d99612}
+.menu-panel a:hover,.menu-panel button:hover{background:#153127;color:var(--green)}
+.nav-enter{background:linear-gradient(135deg,#dce3e7,#929da4 48%,#e7edf0);border:1px solid #f2f6f8;color:#101619;box-shadow:0 7px 24px #c6d0d522,inset 0 1px #fff}
+.btn-green{background:linear-gradient(115deg,#08764f 0%,#20bd7c 52%,#79f0bc 100%);border:1px solid #76efbd;color:#03130c;box-shadow:0 9px 30px #20c77a32,inset 0 1px #ffffff88}
+.btn-red{background:linear-gradient(115deg,#8e2630,#d84c58 55%,#ff8990);border:1px solid #ff9ba0;box-shadow:0 8px 26px #e34b5830,inset 0 1px #ffffff66}
+.btn-outline{background:linear-gradient(145deg,#171e22,#090d0f);border-color:#6a777f;color:#f0f4f6;box-shadow:inset 0 1px #ffffff0d}
+.hero{background:radial-gradient(ellipse at 78% 35%,#16885d35 0,transparent 39%),radial-gradient(ellipse at 94% 80%,#9e343a1a 0,transparent 30%),linear-gradient(115deg,#050708,#0b1113 60%,#050708)}
+.hero-grid{min-height:620px;gap:35px;padding-top:66px;padding-bottom:58px}
+.hero h1{font-size:clamp(42px,5.4vw,68px);font-weight:700;letter-spacing:-2.8px;line-height:1.01;text-wrap:balance;text-shadow:0 4px 28px #0009}
+.hero h1 .accent{background:linear-gradient(100deg,#42d995,#a0f4cf);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 17px #31d58b28)}
+.eyebrow{color:#aebdc4;letter-spacing:2.4px}
+.hero-copy p{color:#c4cdd2;line-height:1.7}
+.hero-actions .btn{min-height:54px;padding:15px 25px}
+.trust span:before{filter:drop-shadow(0 0 5px #43e3a0)}
+.device-stage{height:500px;perspective:1200px}
+.device-glow{width:86%;height:70%;background:radial-gradient(ellipse,#2de49a38 0%,#1a8e6330 35%,transparent 72%);filter:blur(35px)}
+.tablet{width:91%;max-width:530px;padding:13px;border-radius:29px;background:linear-gradient(135deg,#e0e6e9 0%,#68747c 8%,#151b1f 19%,#050809 75%,#aeb8be 100%);border:1px solid #b7c1c8;box-shadow:0 35px 75px #000e,0 0 0 1px #ffffff25,inset 0 1px 2px #fff9;transform:rotate(-4deg) translate(3px,0)}
+.tablet:before,.phone:before{content:'';position:absolute;inset:2px;border-radius:inherit;pointer-events:none;background:linear-gradient(120deg,#ffffff35,transparent 18%,transparent 78%,#ffffff18);z-index:2}
+.tablet-screen{aspect-ratio:1.5;display:block;border-radius:17px;border:1px solid #4b565d;background:#050708}
+.tablet-screen img{width:100%;height:100%;object-fit:cover;object-position:top center;filter:contrast(1.03) saturate(1.04)}
+.phone{right:-1%;bottom:-2%;width:31%;max-width:178px;padding:8px;border-radius:31px;background:linear-gradient(135deg,#f0f3f5 0%,#69747c 9%,#151b1f 22%,#030506 78%,#aeb8be 100%);border:1px solid #d2d9de;box-shadow:0 28px 55px #000e,0 0 0 1px #ffffff24,inset 0 1px 2px #fff;transform:rotate(5deg)}
+.phone-screen{border-radius:23px;border:1px solid #59636a;background:#050708}
+.phone-screen img{width:100%;height:auto;display:block;filter:contrast(1.02) saturate(1.03)}
+.device-caption{bottom:0;left:0;background:linear-gradient(120deg,#101a17,#080d0f);border-color:#4f806c;color:#c9f5df;box-shadow:0 8px 28px #0008}
+.hero-proof{border-color:#34443e;color:#c5d0d4}
+section{position:relative}
+.section-heading h2{font-weight:700;letter-spacing:-1.25px;text-wrap:balance}
+.problem,.how,.faq{background:linear-gradient(180deg,#0c1113,#080b0d);border-color:#2b363b}
+.problem-card,.feature,.step,.install-card,.plan,.faq-item{background:linear-gradient(145deg,#11181b 0%,#090d0f 100%);border-color:#354148;box-shadow:0 14px 36px #0005,inset 0 1px #ffffff08}
+.problem-card h3{font-family:'Space Grotesk',sans-serif;font-weight:700}
+.feature:hover{border-color:#43c891;box-shadow:0 18px 40px #0008,0 0 24px #32d28a12}
+.feature-icon{background:linear-gradient(145deg,#17382c,#0b1712);border:1px solid #2a7655;box-shadow:inset 0 1px #ffffff12,0 0 18px #20c77a12}
+.feature h3,.step h3,.install-card h3{font-family:'Space Grotesk',sans-serif;font-weight:700}
+.step-num{background:linear-gradient(145deg,#e3e9ec,#89969e);box-shadow:0 5px 15px #0008,inset 0 1px #fff}
+.plan{background:linear-gradient(145deg,#141b1e,#090d0f)}
+.plan.featured{border:1px solid #43d99a;background:radial-gradient(ellipse at 90% 0%,#1e9e6a24,transparent 55%),linear-gradient(145deg,#10251c,#090e10);box-shadow:0 20px 50px #0008,0 0 28px #24c77d13}
+.plan-tag{background:linear-gradient(110deg,#16885c,#56e9aa);box-shadow:0 5px 18px #23cb8128}
+.price{letter-spacing:-1.7px;text-shadow:0 5px 20px #0007}
+.install-card{border-color:#3c484e}
+.faq-item{transition:border-color .2s,box-shadow .2s}
+.faq-item.open{border-color:#3c9a70;box-shadow:0 0 24px #25c77a12}
+.final-cta{background:radial-gradient(ellipse at 50% 0%,#1d81542e,transparent 65%),linear-gradient(120deg,#080c0d,#101719,#080b0d);border-color:#3a5548}
+.float-actions{right:22px;bottom:22px;gap:12px}
+.float-download{padding:13px 19px;border:1px solid #8af0bf;border-radius:999px;background:linear-gradient(110deg,#08764f,#25c981 55%,#72edb4);color:#03140d;font-family:'Space Grotesk',sans-serif;font-size:14px;letter-spacing:-.2px;box-shadow:0 10px 28px #000a,0 0 22px #24c77d20,inset 0 1px #ffffffa0}
+.float-wa{width:58px;height:58px;border:1px solid #a5f5cc;background:#25d366;color:#fff;box-shadow:0 10px 28px #000a,0 0 0 5px #25d36618,inset 0 1px #ffffff80}
+.float-wa svg{display:block;width:29px;height:29px;fill:currentColor}
+.modal-panel{border-color:#5b8e76;box-shadow:0 25px 80px #000e,0 0 28px #32d28a15}
+.modal-panel h2{color:#8be8b8}
+.modal-panel h3{color:#43d99a}
+@media(max-width:950px){.hero-grid{min-height:570px}.device-stage{height:420px}}
+@media(max-width:700px){.hero-grid{padding-top:43px}.hero h1{font-size:clamp(39px,10vw,53px);letter-spacing:-1.9px}.device-stage{height:370px}.tablet{width:91%;left:0}.phone{right:0;width:30%;max-width:148px}.float-actions{right:13px;bottom:13px;gap:9px}.float-download{font-size:12px;padding:11px 14px}.float-wa{width:51px;height:51px}.float-wa svg{width:26px;height:26px}}
+@media(max-width:390px){.device-stage{height:330px}.phone{width:31%}.hero h1{font-size:39px}}
+
 </style>
 </head>
 <body>
@@ -62,8 +125,8 @@ footer{padding:30px 0;background:#060809}.footer-inner{display:flex;align-items:
     <div class="trust"><span>Funciona desde tu celular</span><span>Sin descargar de tiendas</span><span>Pagos seguros con Wompi</span></div>
   </div>
   <div class="device-stage" aria-label="MOVÍ se muestra en un celular y una tablet"><div class="device-glow"></div>
-    <div class="tablet"><div class="tablet-screen"><img src="movi-app-screen.png" alt="Pantalla principal de MOVÍ en tablet"></div></div>
-    <div class="phone"><div class="phone-screen"><img src="movi-app-screen.png" alt="Pantalla principal de MOVÍ en celular"></div></div>
+    <div class="tablet"><div class="tablet-screen"><img src="movi-tablet-screen.jpg" alt="Vista del panel principal de MOVÍ en tablet"></div></div>
+    <div class="phone"><div class="phone-screen"><img src="movi-phone-screen.png" alt="Pantalla completa de MOVÍ en celular"></div></div>
     <div class="device-caption">Tu trabajo, bajo control.</div>
   </div>
 </div><div class="hero-proof"><span><b>✓</b> Ingresos organizados</span><span><b>✓</b> Gastos bajo control</span><span><b>✓</b> Costo por kilómetro</span></div></section>
@@ -100,7 +163,7 @@ footer{padding:30px 0;background:#060809}.footer-inner{display:flex;align-items:
 <section class="final-cta"><div class="container"><h2>Empieza hoy a trabajar con objetivos</h2><p>Conoce tu ganancia real desde tu primera jornada.</p><div class="actions"><a class="btn btn-green" href="https://mov-control-de-ganancias.ai.studio" target="_blank" rel="noopener">Comenzar con MOVÍ gratis</a><a class="btn btn-outline" href="https://wa.me/573236500268" target="_blank" rel="noopener">Hablar por WhatsApp</a></div></div></section>
 </main>
 <footer><div class="container footer-inner"><div><a href="#inicio" class="brand">MOVÍ<span>.</span></a><div class="copyright">Tu trabajo, bajo control. · © 2026 MOVÍ. Todos los derechos reservados.</div></div><div class="footer-links"><button onclick="openModal('privacidad')">Privacidad</button><button onclick="openModal('terminos')">Términos</button><a href="#ayuda">Ayuda</a><a href="https://wa.me/573236500268" target="_blank" rel="noopener">WhatsApp</a></div></div></footer>
-<div class="float-actions"><a class="float-download" href="https://mov-control-de-ganancias.ai.studio" target="_blank" rel="noopener">↓ Descarga gratis</a><a class="float-wa" href="https://wa.me/573236500268" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp"><svg viewBox="0 0 32 32" width="27" height="27" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4.2a11.4 11.4 0 0 0-9.8 17.2L5 27l5.8-1.5A11.4 11.4 0 1 0 16 4.2Z"/><path d="M12.1 10.8c-.4-.8-.8-.8-1.2-.8h-1c-.4 0-.9.2-1.2.7-.4.5-1.6 1.6-1.6 3.8s1.6 4.4 1.8 4.7c.2.3 3.1 5 7.6 6.8 3.8 1.5 4.6 1.2 5.4 1.1.8-.1 2.6-1.1 3-2.1.4-1 .4-1.9.3-2.1-.1-.2-.4-.3-.9-.6l-3-1.5c-.4-.2-.7-.3-1 .2-.3.5-1.1 1.5-1.4 1.8-.3.3-.5.4-1 .1-.5-.2-2-.7-3.8-2.3-1.4-1.2-2.3-2.7-2.6-3.2-.3-.5 0-.7.2-.9l.7-.8c.2-.3.3-.5.5-.8.2-.3.1-.6 0-.8l-1.3-3.3Z"/></svg></a></div>
+<div class="float-actions"><a class="float-download" href="https://mov-control-de-ganancias.ai.studio" target="_blank" rel="noopener">↓ Descarga gratis</a><a class="float-wa" href="https://wa.me/573236500268" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.52 3.48A11.86 11.86 0 0 0 12.08 0C5.5 0 .14 5.35.14 11.94c0 2.1.55 4.15 1.6 5.96L.04 24l6.25-1.64a11.9 11.9 0 0 0 5.78 1.47h.01c6.58 0 11.94-5.35 11.94-11.94 0-3.19-1.24-6.19-3.5-8.41ZM12.08 21.8h-.01a9.88 9.88 0 0 1-5.03-1.37l-.36-.21-3.71.97.99-3.62-.24-.37a9.85 9.85 0 0 1-1.51-5.26c0-5.45 4.43-9.88 9.88-9.88a9.8 9.8 0 0 1 6.99 2.9 9.8 9.8 0 0 1 2.89 6.99c0 5.45-4.43 9.88-9.89 9.88Zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.76-1.67-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.03-.53-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.08-.8.38-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.09 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.18-1.42-.08-.13-.28-.2-.58-.35Z"/></svg></a></div>
 <div class="modal" id="infoModal" onclick="outsideClose(event)"><div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" onclick="closeModal()" aria-label="Cerrar">×</button><div id="modalContent"></div></div></div>
 <script>
 const APP_URL="https://mov-control-de-ganancias.ai.studio";
