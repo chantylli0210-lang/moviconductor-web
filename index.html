@@ -97,25 +97,29 @@ section{position:relative}
 @media(max-width:700px){.hero-grid{padding-top:43px}.hero h1{font-size:clamp(39px,10vw,53px);letter-spacing:-1.9px}.device-stage{height:370px}.tablet{width:91%;left:0}.phone{right:0;width:30%;max-width:148px}.float-actions{right:13px;bottom:13px;gap:9px}.float-download{font-size:12px;padding:11px 14px}.float-wa{width:51px;height:51px}.float-wa svg{width:26px;height:26px}}
 @media(max-width:390px){.device-stage{height:330px}.phone{width:31%}.hero h1{font-size:39px}}
 
-  /* CORRECCIÓN DEL SUBMENÚ EN CELULARES */
-@media(max-width:700px){
-  .menu-wrap{
-    position:static;
+
+/* SUBMENU CENTRADO Y ADAPTABLE EN CELULARES */
+@media (max-width: 700px) {
+  .menu-wrap {
+    position: static;
   }
 
-  .menu-panel{
-    position:absolute;
-    top:calc(100% + 8px);
-    left:50%;
-    right:auto;
-    transform:translateX(-50%);
-    width:calc(100vw - 28px);
-    max-width:420px;
-    max-height:calc(100vh - 100px);
-    overflow-y:auto;
-    z-index:100;
+  .menu-panel {
+    position: fixed !important;
+    top: calc(env(safe-area-inset-top, 0px) + 72px) !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    width: calc(100vw - 28px) !important;
+    max-width: 420px !important;
+    max-height: calc(100vh - 90px) !important;
+    max-height: calc(100dvh - 90px) !important;
+    overflow-y: auto !important;
+    margin: 0 !important;
+    z-index: 9999 !important;
   }
 }
+
 </style>
 </head>
 <body>
